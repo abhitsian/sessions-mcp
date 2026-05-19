@@ -33,14 +33,12 @@ Liveness: a transcript written in the last 3 min is `🟢 LIVE`, last 15 min is
 Needs only Node 18+ — no dependencies. Each install reads that machine's own
 `~/.claude/projects/` transcripts: installing this shares the tool, never session data.
 
-1. Put this folder anywhere — clone the repo, or copy `server.js` + `package.json`.
-2. Register it user-scoped (available in every project):
+```sh
+git clone https://github.com/abhitsian/sessions-mcp.git
+claude mcp add -s user sessions -- node "$(pwd)/sessions-mcp/server.js"
+```
 
-   ```
-   claude mcp add -s user sessions -- node /ABSOLUTE/PATH/TO/server.js
-   ```
-
-3. Restart Claude Code. Verify with `claude mcp list`.
+Then restart Claude Code and verify with `claude mcp list`.
 
 This is an MCP server consumed by Claude Code, not a Claude Desk app — no
 `.claude-app.json` manifest on purpose, so Desk won't spawn a stray copy.
