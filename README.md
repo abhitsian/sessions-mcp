@@ -35,17 +35,37 @@ Liveness: a transcript written in the last 3 min is `🟢 LIVE`, last 15 min is 
 
 ## Use cases
 
-A handful of concrete scenarios, beyond *"find past work"*:
+What this looks like in practice, by persona — a few scenarios each.
 
+### For engineers
 - **Resume a setup.** *"Pull the bash commands from the session where I set up Postgres last Tuesday — I need to repeat them on staging."*
 - **Watch a long task from another terminal.** Kick off a 30-minute migration in worktree A; from worktree B, ask Claude *"is it past the database step yet?"* via `tail_session`.
 - **Avoid re-walking dead ends.** *"Search all sessions in this repo for prior attempts at this refactor before I start."*
+- **Diagnose a crashed subagent.** Tail its session JSONL from the parent to see where it died, without re-running the whole task.
 - **Help a teammate stuck on a bug you already hit.** Search your sessions for the error string and hand them the clean transcript.
-- **Diagnose a crashed subagent.** Tail its session JSONL from the parent agent to see where it died, without re-running the whole task.
-- **Generate a weekly changelog.** Search this week's sessions for *"shipped"* / *"merged"* / *"deployed"*, group by project.
-- **Quarterly self-review.** Search for *"I learned"* / *"next time"* — surface retrospective notes scattered across conversations.
-- **PR review with context.** Tail the Claude session that wrote the PR; surface the design discussion turns, skip the tool noise.
-- **Build a personal eval set.** `list_sessions` + `get_session` to dump 50 real prompts to YAML for prompt-regression testing.
+
+### For product managers
+- **Refresh a spec without starting over.** *"Pull the session where I drafted the onboarding flow three weeks ago — I want to update it with this week's feedback."*
+- **Prep for a stakeholder review.** *"Search my sessions for anything about the Acme account this quarter — I want the talking points before tomorrow's review."*
+- **Write the team explainer for a decision.** *"Find the session where I worked through the API design with engineering, then turn the reasoning into a one-pager."*
+- **Status update in one prompt.** *"Draft Friday's update to my director based on what I worked on this week across all my sessions."*
+- **Onboard a new PM to your product area.** *"Show them the sessions where I made the big product decisions here, so they read the reasoning, not just the outcome."*
+
+### For founders and solo operators
+- **Revisit your own thinking before a high-stakes conversation.** *"Find the session where I roughed out the pricing model — I want to re-read it before the investor call."*
+- **One source of truth across scattered conversations.** *"Search every session about the legal entity setup — I need the summary for my accountant."*
+- **Pick up a strategy thread you dropped.** *"Pull the session from last month where I was thinking through the GTM plan — let's continue."*
+
+### For writers, researchers, and content folks
+- **Continue a brainstorm without losing the thread.** *"Pull the session where I was working out the structure of this essay — I want to keep going from there."*
+- **Don't repeat yourself.** *"Search past sessions for quotes I've already drafted on this topic before I write a new one."*
+- **Three drafts, one decision.** *"I drafted three landing-page versions across different sessions — find them so I can compare side by side."*
+- **Turn a thinking session into a deliverable.** *"Pull the session where I worked through the campaign brief, then turn it into something I can send the agency."*
+
+### For customer-facing and operations roles
+- **Walk into the next meeting already prepped.** *"I had Claude help me prep for the Acme call three weeks ago — pull that session, today's follow-up is in an hour."*
+- **Surface the right history on the right account.** *"Search every conversation that mentioned the renewal for Customer X."*
+- **Reuse the playbook you already drafted.** *"Find the session where I worked through the new refund policy — I want to apply the same wording to this case."*
 
 ## Who this is for
 
