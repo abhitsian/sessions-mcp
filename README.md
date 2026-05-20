@@ -67,14 +67,6 @@ What this looks like in practice, by persona — a few scenarios each.
 - **Surface the right history on the right account.** *"Search every conversation that mentioned the renewal for Customer X."*
 - **Reuse the playbook you already drafted.** *"Find the session where I worked through the new refund policy — I want to apply the same wording to this case."*
 
-## Who this is for
-
-- **Anyone running multiple Claude Codes in parallel** (`git worktree`, tmux panes) — `tail_session` is the missing "peek into terminal B without alt-tabbing" primitive.
-- **Agencies / consultancies juggling many client projects** — cross-project search finds *"how did we solve auth for client X six weeks ago."*
-- **Technical writers and researchers** using Claude as a thinking partner — past chats become a queryable corpus.
-- **AI tooling / DX builders** writing hooks and observability — this is the read-path complement to your write-path hooks.
-- **Anyone whose work routinely outlives a single context window.**
-
 ## What it's not for
 
 - **Real-time token streaming.** Turn-granular only — a running session is visible up to its last completed turn.
