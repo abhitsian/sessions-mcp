@@ -22,6 +22,16 @@ claude mcp add -s user sessions -- node "$(pwd)/sessions-mcp/server.js"
 
 Restart Claude Code, verify with `claude mcp list`.
 
+### Use it from other local clients
+
+It's a standard local stdio MCP server, so any MCP client that runs **on your machine** can use it — point the client at the same `node .../server.js` command:
+
+- **Cursor / Cline** — add it under `mcpServers` in `~/.cursor/mcp.json` (or the client's MCP config)
+- **Claude Desktop** — add it under `mcpServers` in `claude_desktop_config.json`
+- **Your own scripts** — talk to the server directly over stdio
+
+It can **not** run in Claude web (the browser): a web page can't spawn a local process or read your disk, and claude.ai only connects to remote HTTP connectors. This is a local-machine tool, so it reads your local Claude Code history only.
+
 ## Tools
 
 | Tool | Use |
@@ -80,6 +90,8 @@ What this looks like in practice, by persona — a few scenarios each.
 - **A memory layer.** Doesn't summarize, embed, or auto-inject context.
 - **Structured analytics.** Search is full-text; no schema for token counts or per-day usage. Use Langfuse or a hooks-based monitor for that.
 - **A `/pin` or `--resume` replacement.** Those push context proactively; this lets the agent pull on demand. Complementary.
+- **Claude web / the browser.** It's a local server — web clients can't reach your machine or files. Local desktop clients only (Claude Code, Claude Desktop, Cursor, your own scripts).
+- **Your Claude *chats*.** It reads Claude *Code* sessions on disk (`~/.claude/projects/`), not your claude.ai / Claude Desktop chat history, which lives in the cloud.
 
 ## Privacy and security
 
