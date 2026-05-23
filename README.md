@@ -6,10 +6,18 @@ Zero dependencies. Four tools. Reads the JSONL transcripts Claude Code already w
 
 ## Why
 
+Two problems hit you once you're in Claude Code every day:
+
+**1. Referring to your past work.** Your work spans dozens of sessions. You constantly need something from an earlier one — a decision, a spec, a fix you already wrote. There's no clean way to get it: you resume a whole old session, dig through raw transcripts, or re-explain it.
+
+**2. Claude Code's limits.** You hit usage caps, and when you do, you're stopped. The usual ways to carry context across sessions — resuming a whole session, pasting transcripts back in — reload everything and re-send it every turn, burning tokens against the same cap. The more cross-session work you do, the faster you hit the wall.
+
 > *"You spent thirty minutes getting everything up to speed — the stack, the conventions, your special cases. Then the terminal crashes, or auto-compaction kicks in. Tomorrow's session is a blank slate."*
 > — [Binu Thayamkery, *Claude Code Forgets Everything Between Sessions*](https://medium.com/@binu_thayamkery/claude-code-forgets-everything-between-sessions-heres-how-to-fix-that-fdba66cf537a)
 
-Claude Code already writes every session to disk as a JSONL transcript under `~/.claude/projects/`. The file is there. The question is whether the agent in your *next* conversation — or your *parallel* conversation in another terminal — can read it. `sessions-mcp` answers that with four MCP tools.
+Claude Code already writes every session to disk as JSONL under `~/.claude/projects/`. sessions-mcp lets any MCP client on your machine read those transcripts — cleaned, scoped, and only when you ask — so your next conversation (in Claude Code, Cursor, or your own scripts) pulls from your history instead of reloading or re-explaining it.
+
+**And it's cheap** — measured on real sessions, a search across everything (or pulling the exact slice you need) runs **~1,000 tokens**, versus **~15,000** to load a whole session, which resume re-sends every turn. The heavy scanning happens in code, not your context window.
 
 ## Install
 
