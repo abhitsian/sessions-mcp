@@ -33,6 +33,12 @@ Restart Claude Code, verify with `claude mcp list`.
 
 Liveness: a transcript written in the last 3 min is `🟢 LIVE`, last 15 min is `● recent`, older is `○ idle`. A live session is visible up to its last **completed** turn — the turn in progress shows up once it finishes.
 
+## Companion command
+
+[`commands/session-monitor.md`](commands/session-monitor.md) is an optional Claude Code slash command built on these tools. It lists and finds your sessions — both live and idle — in one compact table, then waits for you to pick what to do next (tail one, resume one, search by topic). What you do after the list is up to you; it's deliberately not wired to any follow-up workflow.
+
+Install it by dropping the file into `~/.claude/commands/`, then run `/session-monitor` (or `/session-monitor <topic>` to search).
+
 ## Use cases
 
 What this looks like in practice, by persona — a few scenarios each.
