@@ -51,6 +51,24 @@ It can **not** run in Claude web (the browser): a web page can't spawn a local p
 
 Liveness: a transcript written in the last 3 min is `🟢 LIVE`, last 15 min is `● recent`, older is `○ idle`. A live session is visible up to its last **completed** turn — the turn in progress shows up once it finishes.
 
+## Why not just grep?
+
+The transcripts are on disk, but they're unreadable at scale. Each message is stored as one giant single-line JSON object — tool results, thinking, escaping and all. `grep` is line-oriented, so a single match can hand back a 250KB line, and searching a common term across your history returns **megabytes of raw JSON** — more than any context window holds, and not readable anyway.
+
+sessions-mcp does the work in code instead:
+
+- **Parses** the JSONL and keeps only the readable conversation (user + assistant text), discarding tool-result blobs, thinking, and metadata — a 36MB session collapses to ~60KB (~15K tokens) cleaned.
+- **Scans, matches, and ranks in the server**, not your context window — touching a huge history costs CPU, not tokens.
+- **Returns a scoped result** — a search across every session comes back as ~1,200 tokens of ranked snippets; a query into one session returns just the matching slice (~1,300 tokens), not the whole thing.
+
+| | `grep` | sessions-mcp |
+|---|---|---|
+| Cross-session search result | megabytes of raw JSON (lines up to 250KB) | ~1,200 tokens of clean, ranked snippets |
+| Readable / loadable into context | no | yes |
+| Where the scanning happens | dumped into your context | in the server, before it reaches you |
+
+grep finds the haystack; this hands you the needle, clean.
+
 ## Companion command
 
 [`commands/session-monitor.md`](commands/session-monitor.md) is an optional Claude Code slash command built on these tools. It lists and finds your sessions — both live and idle — in one compact table, then waits for you to pick what to do next (tail one, resume one, search by topic). What you do after the list is up to you; it's deliberately not wired to any follow-up workflow.
