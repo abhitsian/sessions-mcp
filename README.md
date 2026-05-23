@@ -67,7 +67,7 @@ sessions-mcp does the work in code instead:
 | Readable / loadable into context | no | yes |
 | Where the scanning happens | dumped into your context | in the server, before it reaches you |
 
-grep finds the haystack; this hands you the needle, clean.
+**The principle underneath:** you pay tokens for *context*, not *computation*. An MCP server pushes the heavy work — reading, parsing, ranking — into code, so the model only pays for the result. grep dumps the haystack into your context; this does the searching in the server and hands you the needle, clean.
 
 ## Companion command
 
